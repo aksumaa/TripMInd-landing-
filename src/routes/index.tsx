@@ -1,24 +1,42 @@
 import { createFileRoute } from "@tanstack/react-router";
+import { I18nProvider } from "@/lib/i18n";
+import { Nav, Hero, Problem, Workspace, GlobeExperience, Stages } from "@/components/landing/SectionsTop";
+import { Planner, Trust, Adapt, Tours, Compare, Ecosystem, Roadmap, FinalCta, Footer } from "@/components/landing/SectionsBottom";
 
-// No head() here: the home route inherits title/description/og/twitter from
-// __root.tsx, and ships no og:image so serve-time hosting can inject the
-// project's social preview (explicit og:image or latest screenshot).
 export const Route = createFileRoute("/")({
+  head: () => ({
+    meta: [
+      { title: "TripMind — One intelligent workspace for every journey" },
+      { name: "description", content: "TripMind is an AI travel operating system: discover destinations, plan trips, compare Ready Tours, travel and adapt in one workspace." },
+      { property: "og:title", content: "TripMind — AI travel operating system" },
+      { property: "og:description", content: "Discover. Plan. Compare. Travel. Adapt. One intelligent workspace for every journey." },
+      { property: "og:type", content: "website" },
+      { name: "twitter:card", content: "summary_large_image" },
+    ],
+  }),
   component: Index,
 });
 
-// IMPORTANT: Replace this placeholder. See ./README.md for routing conventions.
 function Index() {
   return (
-    <div
-      className="flex min-h-screen items-center justify-center"
-      style={{ backgroundColor: "#fcfbf8" }}
-    >
-      <img
-        data-lovable-blank-page-placeholder="REMOVE_THIS"
-        src="https://cdn.gpteng.co/blank-app-v1.svg"
-        alt="Your app will live here!"
-      />
-    </div>
+    <I18nProvider>
+      <Nav />
+      <main>
+        <Hero />
+        <Problem />
+        <Workspace />
+        <GlobeExperience />
+        <Stages />
+        <Planner />
+        <Trust />
+        <Adapt />
+        <Tours />
+        <Compare />
+        <Ecosystem />
+        <Roadmap />
+        <FinalCta />
+      </main>
+      <Footer />
+    </I18nProvider>
   );
 }
