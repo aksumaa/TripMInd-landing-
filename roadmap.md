@@ -4,4 +4,5 @@
 - [ ] Discovery card with photo, description, distance, flight
 - [ ] Ivory light palette + dark mode toggle, simpler nav
 - [ ] Tours with photos, planner step messages, compare bars, photo final CTA, subtle card tilt
-- [ ] Use uploaded TripMind logo in nav and footer
+- [ ] Use uploaded TripMind logo in nav and footer (+ favicon)
+- [ ] AI Planner: 6 progress steps, rich itinerary (day, activities, time, cost, transport, hotel, alternatives, photos), 3D depth
