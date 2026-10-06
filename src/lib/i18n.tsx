@@ -1,3 +1,4 @@
+import { EXTRA } from "./i18n-extra";
 import { createContext, useContext, useEffect, useState, type ReactNode } from "react";
 
 const en = {
@@ -337,7 +338,7 @@ const DICTS: Record<Lang, Dict> = { uz, ru, en };
 // Demonstration rates only.
 const RATES: Record<Currency, number> = { USD: 1, EUR: 0.92, UZS: 12700 };
 
-type Ctx = { lang: Lang; setLang: (l: Lang) => void; t: Dict; currency: Currency; setCurrency: (c: Currency) => void; money: (usd: number) => string };
+type Ctx = { lang: Lang; setLang: (l: Lang) => void; t: Dict; currency: Currency; setCurrency: (c: Currency) => void; money: (usd: number) => string; x: (typeof EXTRA)["en"]; dark: boolean; toggleDark: () => void };
 const I18n = createContext<Ctx | null>(null);
 
 export function I18nProvider({ children }: { children: ReactNode }) {
@@ -353,12 +354,16 @@ export function I18nProvider({ children }: { children: ReactNode }) {
   useEffect(() => { document.documentElement.lang = lang; }, [lang]);
   const setLang = (l: Lang) => { setLangState(l); sessionStorage.setItem("tm-lang", l); };
   const setCurrency = (c: Currency) => { setCurState(c); sessionStorage.setItem("tm-cur", c); };
+  const [dark, setDark] = useState(false);
+  useEffect(() => { setDark(localStorage.getItem("tm-theme") === "dark"); }, []);
+  useEffect(() => { document.documentElement.classList.toggle("dark", dark); }, [dark]);
+  const toggleDark = () => setDark((d) => { localStorage.setItem("tm-theme", d ? "light" : "dark"); return !d; });
   const money = (usd: number) => {
     const v = usd * RATES[currency];
     const locale = lang === "en" ? "en-US" : lang === "ru" ? "ru-RU" : "uz-UZ";
     return new Intl.NumberFormat(locale, { style: "currency", currency, maximumFractionDigits: 0 }).format(currency === "UZS" ? Math.round(v / 1000) * 1000 : v);
   };
-  return <I18n.Provider value={{ lang, setLang, t: DICTS[lang], currency, setCurrency, money }}>{children}</I18n.Provider>;
+  return <I18n.Provider value={{ lang, setLang, t: DICTS[lang], currency, setCurrency, money, x: EXTRA[lang], dark, toggleDark }}>{children}</I18n.Provider>;
 }
 
 export function useI18n() {
