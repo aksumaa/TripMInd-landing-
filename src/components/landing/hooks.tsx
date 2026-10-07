@@ -66,7 +66,7 @@ export function Logo({ dark = false, size = "md" }: { dark?: boolean; size?: "sm
   const h = size === "sm" ? "h-7" : "h-8";
   return (
     <span className={`inline-flex items-center gap-2 font-semibold tracking-tight ${dark ? "text-on-dark" : "text-foreground"}`}>
-      <img src={markAsset.url} alt="" className={`${h} w-auto rounded-full`} />
+      <img src={markAsset.url} alt="" className={`${h} w-auto`} />
       <span className="text-[1.15rem]"><span className="font-bold">Trip</span><span className="font-normal">Mind</span></span>
     </span>
   );
