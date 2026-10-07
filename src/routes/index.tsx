@@ -1,6 +1,6 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { I18nProvider } from "@/lib/i18n";
-import { Nav, Hero, Problem, Workspace, GlobeExperience, Stages } from "@/components/landing/SectionsTop";
+import { Nav, Hero, Problem, Workspace, GlobeExperience, Destinations, Stages } from "@/components/landing/SectionsTop";
 import { Planner, Trust, Adapt, Tours, Compare, Ecosystem, Roadmap, FinalCta, Footer } from "@/components/landing/SectionsBottom";
 
 export const Route = createFileRoute("/")({
@@ -26,6 +26,7 @@ function Index() {
         <Problem />
         <Workspace />
         <GlobeExperience />
+        <Destinations />
         <Stages />
         <Planner />
         <Trust />

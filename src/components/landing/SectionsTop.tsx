@@ -113,7 +113,7 @@ export function Hero() {
       if (!parallax.current) return;
       const dx = e.clientX / window.innerWidth - 0.5, dy = e.clientY / window.innerHeight - 0.5;
       parallax.current.querySelectorAll<HTMLElement>("[data-depth]").forEach((el) => {
-        const d = Number(el.dataset.depth);
+        const d = Number(el.dataset["depth"]);
         el.style.translate = `${dx * d}px ${dy * d}px`;
       });
     };
