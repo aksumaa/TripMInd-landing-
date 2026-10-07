@@ -6,3 +6,4 @@
 - [ ] Tours with photos, planner step messages, compare bars, photo final CTA, subtle card tilt
 - [ ] Use uploaded TripMind logo in nav and footer (+ favicon)
 - [ ] AI Planner: 6 progress steps, rich itinerary (day, activities, time, cost, transport, hotel, alternatives, photos), 3D depth
+- [ ] Final polish: spacing, radius/shadow consistency, navbar scroll, mobile-first (no overflow, swipe), lazy images, reduced motion, full top-to-bottom test
