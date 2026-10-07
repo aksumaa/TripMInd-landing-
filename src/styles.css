@@ -193,3 +193,4 @@
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after { animation-duration: .01ms !important; animation-iteration-count: 1 !important; transition-duration: .2s !important; }
 }
+@keyframes earth-spin { from { background-position: 0 0 } to { background-position: -200% 0 } }
