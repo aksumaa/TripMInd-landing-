@@ -141,7 +141,7 @@ export function Hero() {
           <Globe3D className="absolute inset-0" recede compact={isMobile} focus={focus}
             onHover={(k) => setFocus(k)} onSelect={(k) => setFocus(k)}
             routes={[["tashkent", "istanbul"], ["istanbul", "paris"]]} markers={HERO_MARKERS}
-            labels={labelsFor(isMobile ? ["tashkent", "istanbul", "paris"] : HERO_MARKERS, place)} initialLon={40} />
+            labels={labelsFor(isMobile ? ["tashkent", "istanbul", "paris"] : HERO_MARKERS.filter((k) => k !== "samarkand"), place)} initialLon={40} />
           <div ref={parallax} className="pointer-events-none absolute inset-0">
             {/* Boarding pass */}
             <div data-depth="18" className="absolute left-0 top-[10%] hidden w-52 -rotate-6 rounded-xl border border-border bg-card/90 p-3 shadow-card backdrop-blur md:block">
