@@ -45,7 +45,7 @@ void main(){
   vec3 col=mix(night*vec3(1.0,0.82,0.55)*1.3, day*(0.32+0.85*max(d,0.0)), m);
   vec3 v=normalize(cameraPosition-vW); vec3 h=normalize(sun+v);
   float w=texture2D(waterT,vUv).r;
-  col+=w*pow(max(dot(n,h),0.),48.)*0.45*m*vec3(1.,0.95,0.85);
+  col+=w*pow(max(dot(n,h),0.),64.)*0.22*m*vec3(1.,0.95,0.85);
   float rim=pow(1.-max(dot(n,v),0.),3.);
   col+=vec3(0.45,0.65,1.0)*rim*0.55;
   gl_FragColor=vec4(col,1.);
@@ -72,7 +72,7 @@ function Earth({ p, labelEls, wrap }: { p: GlobeProps; labelEls: LabelRefs; wrap
   const group = useRef<THREE.Group>(null!);
   const planeRef = useRef<THREE.Group>(null!);
   const reduce = useMemo(() => typeof window !== "undefined" && window.matchMedia("(prefers-reduced-motion: reduce)").matches, []);
-  const st = useRef({ ry: (-(p.initialLon ?? 40) - 90) * DEG + Math.PI, rx: 0.35, vy: 0, vx: 0, drag: false, lx: 0, ly: 0, mx: 0, my: 0 });
+  const st = useRef({ ry: Math.PI / 2 - ((p.initialLon ?? 40) + 180) * DEG, rx: 0.35, vy: 0, vx: 0, drag: false, lx: 0, ly: 0, mx: 0, my: 0 });
 
   useEffect(() => { [day, night, water].forEach((t) => { t.anisotropy = 4; }); }, [day, night, water]);
 
@@ -136,7 +136,7 @@ function Earth({ p, labelEls, wrap }: { p: GlobeProps; labelEls: LabelRefs; wrap
     const recede = p.recede ? Math.min(1, window.scrollY / window.innerHeight) : 0;
     camera.position.x += (s.mx * 0.12 - camera.position.x) * 0.05;
     camera.position.y += (-s.my * 0.08 - camera.position.y) * 0.05;
-    camera.position.z = 3.3 + recede * 1.2;
+    camera.position.z = 3.9 + recede * 1.2;
     camera.lookAt(0, 0, 0);
 
     lines.forEach(({ trail }, i) => {
@@ -207,7 +207,7 @@ export default function GlobeScene(p: GlobeProps) {
   const labelKeys = Object.keys(p.labels ?? {}) as CityKey[];
   return (
     <div ref={wrap} className="relative h-full w-full cursor-grab active:cursor-grabbing" style={{ touchAction: "pan-y" }}>
-      <Canvas dpr={[1, p.compact ? 1.5 : 2]} frameloop={visible ? "always" : "never"} camera={{ position: [0, 0, 3.3], fov: 38 }} gl={{ antialias: true, alpha: true, powerPreference: "high-performance" }}>
+      <Canvas dpr={[1, p.compact ? 1.5 : 2]} frameloop={visible ? "always" : "never"} camera={{ position: [0, 0, 3.9], fov: 38 }} gl={{ antialias: true, alpha: true, powerPreference: "high-performance" }}>
         <Suspense fallback={null}><Earth p={p} labelEls={labelEls} wrap={wrap} /></Suspense>
       </Canvas>
       <div className="pointer-events-none absolute inset-0 overflow-hidden" aria-hidden={false}>
